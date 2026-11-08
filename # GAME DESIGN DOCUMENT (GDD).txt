@@ -1,0 +1,373 @@
+# GAME DESIGN DOCUMENT (GDD)
+# NHẬT KÝ ĐI NHẬT — HÀNH TRÌNH THA HƯƠNG
+
+**Phiên bản tài liệu:** 1.0  
+**Thể loại:** Life Simulation / Choice-Based / Strategy / Story  
+**Nền tảng:** Web Browser (PC, Mobile)  
+**Chế độ:** Single-player, Offline-first  
+**Công nghệ dự kiến:** React, TypeScript, Vite, Zustand  
+**Đối tượng:** Người chơi Việt Nam, ưu tiên độ tuổi 16+  
+**Trạng thái:** Tài liệu thiết kế trước sản xuất
+
+---
+
+# PHẦN I. TỔNG QUAN VÀ TẦM NHÌN
+
+## 1. Giới thiệu game
+
+### 1.1. Ý tưởng cốt lõi
+
+*Nhật Ký Đi Nhật — Hành Trình Tha Hương* là trò chơi mô phỏng cuộc sống của một người Việt Nam sang Nhật Bản làm việc, với mục tiêu thay đổi hoàn cảnh kinh tế, phát triển bản thân và xây dựng tương lai.
+
+Người chơi bắt đầu bằng việc tạo một nhân vật có xuất thân, điều kiện tài chính, trình độ tiếng Nhật và mục tiêu cuộc sống riêng.
+
+Sau khi đặt chân đến Nhật, nhân vật phải đối mặt với hàng loạt thử thách:
+
+- Làm quen với môi trường sống và văn hóa mới.
+- Đi làm, nhận lương và quản lý tài chính.
+- Học tiếng Nhật để mở rộng cơ hội.
+- Duy trì sức khỏe thể chất và tinh thần.
+- Xây dựng quan hệ với đồng nghiệp, bạn bè và gia đình.
+- Giải quyết những tình huống bất ngờ trong sinh hoạt.
+- Quyết định nên tiết kiệm, đầu tư cho học tập hay dành thời gian nghỉ ngơi.
+- Đối mặt với những ngã rẽ quan trọng về công việc và tương lai.
+
+Mỗi quyết định làm thay đổi trạng thái của nhân vật và ảnh hưởng đến những sự kiện xuất hiện sau đó.
+
+Điểm đặc biệt là **không tồn tại duy nhất một con đường chiến thắng**.
+
+Một nhân vật có thể thành công khi tiết kiệm đủ tiền gửi về gia đình. Người khác có thể thành công nhờ học được tiếng Nhật, phát triển kỹ năng và tìm thấy hướng nghề nghiệp phù hợp. Một người khác lại lựa chọn quay về Việt Nam sau khi đạt mục tiêu tài chính.
+
+Game đánh giá hành trình dựa trên mục tiêu ban đầu, không chỉ dựa vào tổng số tiền kiếm được.
+
+### 1.2. Trải nghiệm mong muốn
+
+Người chơi cần có cảm giác rằng mình đang tự viết nên câu chuyện cuộc đời của một con người.
+
+Các quyết định phải có ba đặc điểm:
+
+**Có ý nghĩa:** Một lựa chọn có thể tạo ra lợi ích nhưng đồng thời gây ra tổn thất.
+
+**Có hậu quả:** Những lựa chọn quan trọng không biến mất sau khi người chơi đóng hộp thoại. Chúng có thể ảnh hưởng đến tương lai.
+
+**Có khả năng tạo bất ngờ:** Không phải mọi quyết định đều dẫn đến kết quả giống nhau trong các lượt chơi.
+
+Ví dụ:
+
+Người chơi quyết định nhận thêm ca làm vào cuối tuần để tăng thu nhập. Nhân vật nhận được tiền công nhưng thể lực giảm đáng kể.
+
+Tuần tiếp theo, một người bạn mời tham gia buổi giao lưu tiếng Nhật. Nhân vật đang quá mệt nên không thể tham gia, bỏ lỡ cơ hội quen một người có thể hỗ trợ mình trong công việc sau này.
+
+Như vậy, việc làm thêm không chỉ gây thay đổi chỉ số sức khỏe mà còn gián tiếp tác động đến một chuỗi sự kiện trong tương lai.
+
+### 1.3. Các trụ cột thiết kế
+
+Game có năm trụ cột chính:
+
+1. **Lựa chọn và hậu quả:** Mọi hành động quan trọng đều có tác động.
+2. **Mô phỏng cuộc sống:** Thời gian, tiền bạc, sức khỏe và những nhu cầu cơ bản được mô phỏng nhất quán.
+3. **Phát triển nhân vật:** Người chơi có thể cải thiện ngôn ngữ, kỹ năng, tài chính và các mối quan hệ.
+4. **Cốt truyện phân nhánh:** Hành trình thay đổi theo lựa chọn, các điều kiện và lịch sử nhân vật.
+5. **Khả năng chơi lại:** Các mục tiêu, sự kiện, hoàn cảnh và lựa chọn khác nhau tạo nên những câu chuyện khác nhau.
+
+### 1.4. Những điều game không hướng tới
+
+Game không phải phần mềm tư vấn pháp lý về lao động hoặc nhập cư Nhật Bản.
+
+Game cũng không phải mô phỏng tài chính chính xác đến từng khoản khấu trừ thực tế, và không sử dụng việc bóc lột người lao động làm yếu tố gây cười.
+
+Game tập trung vào trải nghiệm cá nhân, quản lý tài nguyên, rủi ro, quyền lợi và quyết định cuộc sống.
+
+Các mức lương, sinh hoạt phí và xác suất được nêu trong tài liệu trước hết là **giá trị giả định phục vụ cân bằng gameplay**, không phải số liệu đại diện cho thị trường lao động Nhật Bản.
+
+---
+
+# PHẦN II. CẤU TRÚC TOÀN BỘ TRÒ CHƠI
+
+## 2. Vòng đời một nhân vật
+
+Một lượt chơi hoàn chỉnh mô phỏng khoảng ba năm cuộc đời tại Nhật Bản.
+
+Game chia hành trình thành năm chương lớn.
+
+### Chương 1: Ngày đầu nơi đất khách
+
+**Thời gian trong game:** Ngày 1–30.
+
+**Mục đích:** Giới thiệu hệ thống cơ bản và xây dựng cảm xúc ban đầu.
+
+Nội dung:
+
+- Đến Nhật và nhận phòng ở.
+- Làm quen với đồng nghiệp.
+- Bắt đầu công việc tại nhà máy.
+- Khám phá các khoản sinh hoạt phí.
+- Làm quen với quản lý tài chính.
+- Trải qua những ngày làm việc đầu tiên.
+- Gặp các sự kiện giao tiếp bằng tiếng Nhật.
+- Nhận khoản lương đầu tiên.
+- Đánh giá khả năng thích nghi.
+
+Đây là chương được triển khai trong MVP.
+
+### Chương 2: Học cách thích nghi
+
+**Thời gian:** Tháng 2–6.
+
+Cơ chế mới:
+
+- Quản lý tài chính theo tháng.
+- Mua vật dụng cải thiện đời sống.
+- Các mối quan hệ phát triển theo thời gian.
+- Bắt đầu học kỹ năng nghề nghiệp.
+- Sự kiện liên quan đến môi trường làm việc.
+- Lựa chọn những mục tiêu tài chính.
+- Các mốc tiến bộ tiếng Nhật.
+
+Đến cuối chương, người chơi có thể bắt đầu lựa chọn chuyên sâu về cách phát triển bản thân.
+
+### Chương 3: Những ngã rẽ
+
+**Thời gian:** Tháng 7–12.
+
+Cơ chế mới:
+
+- Đánh giá năng lực công việc.
+- Cơ hội nâng cao tay nghề.
+- Các nhiệm vụ nhiều bước.
+- Những quyết định liên quan đến gia đình.
+- Quản lý các khoản tiết kiệm và nghĩa vụ tài chính.
+- Những mâu thuẫn hoặc hiểu lầm cần giải quyết.
+- Cơ hội thay đổi môi trường sống nếu phù hợp với điều kiện của nhân vật.
+
+### Chương 4: Xây dựng tương lai
+
+**Thời gian:** Năm thứ hai.
+
+Cơ chế mới:
+
+- Lựa chọn hướng phát triển nghề nghiệp.
+- Học tiếng Nhật nâng cao.
+- Tìm cơ hội tăng thu nhập hợp pháp.
+- Xây dựng các mối quan hệ sâu hơn.
+- Các sự kiện dài hạn có điều kiện.
+- Quyết định ưu tiên công việc, gia đình hay học tập.
+- Điều chỉnh mục tiêu ban đầu.
+
+### Chương 5: Quyết định cuộc đời
+
+**Thời gian:** Năm thứ ba.
+
+Người chơi phải đối mặt với những quyết định cuối:
+
+- Tiếp tục phát triển sự nghiệp tại Nhật nếu đáp ứng các điều kiện.
+- Hoàn thành mục tiêu tài chính và trở về Việt Nam.
+- Theo đuổi học tập hoặc chuyển hướng nghề nghiệp nếu có lộ trình phù hợp.
+- Ưu tiên gia đình hoặc đời sống cá nhân.
+- Đánh giá lại những gì đã đạt được trong ba năm.
+
+Game tổng kết toàn bộ hành trình bằng các chỉ số, cột mốc, lựa chọn quan trọng và kết thúc tương ứng.
+
+## 3. Cách thời gian trôi trong game
+
+Để tránh việc người chơi phải bấm qua hơn một nghìn ngày, game sử dụng cơ chế thời gian theo chương.
+
+| Giai đoạn | Một lượt quyết định | Mục đích |
+|---|---|---|
+| 30 ngày đầu | 1 ngày | Học gameplay và làm quen cuộc sống |
+| Từ tháng 2 | 1 tuần | Quản lý các hoạt động dài hạn |
+| Từ năm 2 | 1 tuần | Phát triển nhân vật và cốt truyện |
+| Cuối năm 3 | Các tuần quan trọng | Tổng kết và ra quyết định kết thúc |
+
+Trong giai đoạn theo tuần, game vẫn tính lương, chi phí và tình trạng nhân vật theo số ngày thực tế được mô phỏng, nhưng người chơi chỉ cần chọn một định hướng hoạt động chính cho tuần đó.
+
+Ví dụ:
+
+- Tập trung làm thêm để tăng tiết kiệm.
+- Dành nhiều thời gian học tiếng Nhật.
+- Ưu tiên nghỉ ngơi và phục hồi.
+- Tăng cường giao lưu và quan hệ xã hội.
+
+Mục đích là giữ nhịp chơi nhanh nhưng vẫn duy trì cảm giác thời gian đang trôi.
+
+---
+
+# PHẦN III. NHÂN VẬT VÀ HỆ THỐNG CHỈ SỐ
+
+## 4. Tạo nhân vật
+
+Ở đầu lượt chơi, người chơi được tạo nhân vật.
+
+### 4.1. Các trường thông tin
+
+| Thuộc tính | Mô tả |
+|---|---|
+| Tên | Người chơi tự nhập |
+| Tuổi | Từ 20 đến 30, không ảnh hưởng đến MVP |
+| Ngoại hình | Avatar đơn giản |
+| Quê quán | Thông tin phục vụ hội thoại |
+| Hoàn cảnh | Xuất thân và điều kiện tài chính |
+| Mục tiêu | Động lực của hành trình |
+
+Trong MVP, tên và avatar là những thông tin người chơi có thể thay đổi tự do. Hoàn cảnh và mục tiêu được chọn từ các mẫu có sẵn.
+
+### 4.2. Ba kiểu hoàn cảnh
+
+**Hoàn cảnh A — Gia đình bình thường**
+
+Nhân vật có một khoản tiền dự phòng nhỏ, không chịu áp lực tài chính nghiêm trọng ngay lập tức.
+
+**Hoàn cảnh B — Muốn cải thiện kinh tế gia đình**
+
+Nhân vật mang trách nhiệm tài chính lớn hơn và thường gặp những sự kiện liên quan đến việc hỗ trợ gia đình.
+
+**Hoàn cảnh C — Muốn phát triển bản thân**
+
+Nhân vật quan tâm nhiều hơn đến kỹ năng, tiếng Nhật và định hướng nghề nghiệp.
+
+Trong MVP, các hoàn cảnh chỉ thay đổi lời giới thiệu và mục tiêu phụ. Phiên bản đầy đủ mới áp dụng các điều kiện kinh tế khác nhau để tránh tăng khối lượng cân bằng quá sớm.
+
+### 4.3. Chọn mục tiêu cuộc đời
+
+Người chơi chọn một mục tiêu chính:
+
+1. **Kiếm tiền cho gia đình:** Ưu tiên tiết kiệm và chuyển tiền.
+2. **Phát triển sự nghiệp:** Ưu tiên kỹ năng và cơ hội nghề nghiệp.
+3. **Trải nghiệm cuộc sống:** Ưu tiên sự cân bằng, học hỏi và quan hệ xã hội.
+
+Mục tiêu ảnh hưởng đến nhiệm vụ, thông điệp và kết thúc, nhưng không khóa người chơi vào một cách chơi duy nhất.
+
+Người chơi vẫn có thể thay đổi mục tiêu ở các mốc quan trọng.
+
+## 5. Hệ thống chỉ số
+
+MVP sử dụng sáu nhóm chỉ số chính.
+
+### 5.1. Tiền mặt — Cash
+
+Đơn vị: JPY.
+
+Tiền mặt dùng để:
+
+- Mua đồ ăn, vật phẩm.
+- Học tiếng Nhật.
+- Tham gia hoạt động xã hội.
+- Thanh toán các khoản sinh hoạt.
+- Xử lý những tình huống phát sinh.
+
+Tiền mặt phải được phân biệt với lương đã kiếm được nhưng chưa đến ngày thanh toán.
+
+Người chơi luôn thấy rõ số tiền đang sở hữu và lương dự kiến nhận được.
+
+### 5.2. Thể lực — Energy
+
+Khoảng giá trị: 0–100.
+
+Ý nghĩa: mức năng lượng hiện tại của nhân vật.
+
+Thể lực giảm khi đi làm, học tập quá nhiều hoặc làm thêm giờ.
+
+Thể lực tăng khi ngủ và nghỉ ngơi.
+
+Khi thể lực quá thấp, một số hoạt động bị giới hạn.
+
+| Mức thể lực | Trạng thái |
+|---|---|
+| 75–100 | Sung sức |
+| 45–74 | Bình thường |
+| 20–44 | Mệt mỏi |
+| 0–19 | Kiệt sức |
+
+Nếu thể lực xuống dưới 20, nhân vật sẽ chịu nguy cơ giảm sức khỏe trong quá trình xử lý cuối ngày.
+
+### 5.3. Sức khỏe — Health
+
+Khoảng giá trị: 0–100.
+
+Sức khỏe thể hiện trạng thái thể chất dài hạn, không giống thể lực.
+
+Ví dụ:
+
+Sau một ngày làm việc, nhân vật có thể rất mệt nhưng vẫn khỏe mạnh.
+
+Ngược lại, nếu nhiều ngày liên tục làm việc quá sức, ngủ kém và căng thẳng, sức khỏe sẽ bắt đầu giảm.
+
+Sức khỏe phục hồi chậm hơn thể lực.
+
+Khi sức khỏe xuống thấp, game sẽ kích hoạt sự kiện chăm sóc sức khỏe và cho người chơi lựa chọn tìm kiếm hỗ trợ.
+
+### 5.4. Căng thẳng — Stress
+
+Khoảng giá trị: 0–100.
+
+Khác với sức khỏe, ở chỉ số này giá trị càng cao càng bất lợi.
+
+Nguyên nhân tăng:
+
+- Làm thêm liên tục.
+- Áp lực công việc.
+- Thiếu ngủ.
+- Mâu thuẫn với người khác.
+- Khó khăn về tài chính.
+
+Nguyên nhân giảm:
+
+- Nghỉ ngơi.
+- Gọi điện cho gia đình.
+- Giao lưu với bạn bè.
+- Giải quyết những vấn đề còn tồn đọng.
+
+Stress cao làm tăng xác suất gặp các sự kiện về mệt mỏi và giảm hiệu quả một số hoạt động.
+
+Game không dùng chỉ số này để chẩn đoán các vấn đề sức khỏe tâm thần.
+
+### 5.5. Năng lực tiếng Nhật — Japanese Skill
+
+Chỉ số kinh nghiệm từ 0 trở lên.
+
+Đây là hệ thống tiến trình nội bộ game, không đại diện trực tiếp cho chứng chỉ JLPT thực tế.
+
+| Điểm kỹ năng | Mức giao tiếp |
+|---|---|
+| 0–49 | Mới bắt đầu |
+| 50–119 | Giao tiếp sinh hoạt |
+| 120–219 | Giao tiếp công việc |
+| 220–349 | Thành thạo hơn |
+| 350+ | Năng lực nâng cao |
+
+Những mức cao được thiết kế cho game nhiều năm. MVP không yêu cầu nhân vật đạt trình độ cao chỉ trong 30 ngày.
+
+Năng lực tiếng Nhật có thể:
+
+- Mở khóa các lựa chọn hội thoại.
+- Giúp nhân vật hiểu hướng dẫn công việc.
+- Tăng hiệu quả tương tác xã hội.
+- Giảm một số rủi ro hiểu nhầm.
+- Hỗ trợ cơ hội phát triển về sau.
+
+### 5.6. Quan hệ xã hội — Relationships
+
+Mỗi nhân vật NPC quan trọng có một điểm quan hệ riêng từ 0–100.
+
+Không sử dụng một điểm quan hệ chung cho tất cả mọi người.
+
+Ví dụ:
+
+- Lan: 50/100.
+- Sato: 45/100.
+- Haru: 40/100.
+- Gia đình: 60/100.
+
+Quan hệ được cải thiện khi người chơi thể hiện sự hợp tác, giữ lời hứa, giúp đỡ hoặc dành thời gian phù hợp.
+
+Các mối quan hệ không nhất thiết tăng bằng tiền. Tặng quà không phải cách duy nhất để duy trì tình bạn.
+
+### 5.7. Các giá trị ẩn
+
+Ngoài sáu nhóm chỉ số, engine lưu một số giá trị không xuất hiện trực tiếp trên dashboard:
+
+- Mức độ tin cậy tại nơi làm việc.
+- Số lần làm thêm trong tuần.
+- Lịch sử sự kiện đã xảy ra.
+- Những lời hứa chưa hoàn thành.
+- Số ngày thiếu tiền sinh hoạt

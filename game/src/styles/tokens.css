@@ -1,0 +1,21 @@
+:root {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #243c36;
+  background: #f5f2e9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-paper: #fffdf7;
+  --color-background: #f5f2e9;
+  --color-ink: #243c36;
+  --color-muted: #6b746a;
+  --color-line: #e3e3d5;
+  --color-green: #3f6c58;
+  --color-green-soft: #edf2e8;
+  --color-blue: #5d8190;
+  --color-rose: #b57c6b;
+  --color-error: #973e32;
+  --radius-card: 20px;
+}
