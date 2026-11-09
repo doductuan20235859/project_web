@@ -14,7 +14,7 @@ Việc dùng fixture giúp kiểm tra một phần khi phần bên cạnh chưa 
 
 ## 2. Common base để cả nhóm bắt đầu
 
-Common base được theo dõi tại [#7](https://github.com/doductuan20235859/project_web/issues/7), nhánh `feature/7-parallel-base`. Nó bổ sung types, fixture và workbench, chưa thực thi gameplay ngày trong ứng dụng chính, chưa nối `GameSession` với một engine ngày thật và chưa đổi schema save. PR về `develop` phải được DXKhai hoặc kjfvnju review; tác giả không tự merge.
+Common base được theo dõi tại [#7](https://github.com/doductuan20235859/project_web/issues/7), nhánh `feature/7-parallel-base`, [PR #8](https://github.com/doductuan20235859/project_web/pull/8) về develop. Nó bổ sung types, fixture và workbench, chưa thực thi gameplay ngày trong ứng dụng chính, chưa nối `GameSession` với một engine ngày thật và chưa đổi schema save. PR về `develop` phải có reviewer khác tác giả; đã yêu cầu DXKhai20235749 và kjfvnju review, chưa merge khi thiếu review.
 
 | Đường dẫn trong `game/` | Giao kèo dùng chung |
 |---|---|
@@ -41,15 +41,15 @@ Từ `game/`, dùng `npm run dev:workbench` để mở workbench tại port 5174
 
 ## 3. Ma trận 3 Job × 5 người
 
-Các số #2–#6 là issue Job 1 đã có. Mã `J2-*`, `J3-*` và `J-INTEGRATION` là mã kế hoạch, chưa phải số issue GitHub. Khi tạo issue, thay mã bằng link thật; không gán số giả.
+Tất cả link dưới đây là issue thật đã tạo và gán Assignee trên GitHub: Job 1 ở #2–#6, Job 2 ở #9–#13, Job 3 ở #14–#18; #19 và #20 là hai gate tích hợp. Các mã J1/J2/J3 dùng để nhận diện phạm vi, không phải thứ tự chờ toàn nhóm.
 
 | Owner | Job 1 — độc lập trên common base | Job 2 — nối tiếp phần mình | Job 3 — hoàn thiện và kiểm chứng |
 |---|---|---|---|
-| **doductuan** — rules/content | [#2](https://github.com/doductuan20235859/project_web/issues/2): rules ngày và validator, **6 giờ** | `J2-RULES`: ca/nghỉ, payday/chi phí và validator phiên bản, **6 giờ** | `J3-RULES`: kịch bản/oracle cân bằng 30 ngày và tài liệu luật, **6 giờ** |
-| **DXKhai** — engine | [#3](https://github.com/doductuan20235859/project_web/issues/3): executor ngày với fixture rules, **8 giờ** | `J2-ENGINE`: nhiều ngày, kinh tế/sức khỏe cuối ngày, **7 giờ** | `J3-ENGINE`: seed, ledger, ngưỡng và biên ngày 30, **6 giờ** |
-| **dhminh** — UI | [#5](https://github.com/doductuan20235859/project_web/issues/5): ActivityPanel/DayReview qua props, **6 giờ** | `J2-UI`: nhật ký/quan hệ và review suy ra từ state, **6 giờ** | `J3-UI`: mobile, bàn phím, lỗi và presentation qua DayActions, **6 giờ** |
-| **kjfvnju** — session/save | [#4](https://github.com/doductuan20235859/project_web/issues/4): dispatch với executor được inject, **7 giờ** | `J2-SAVE`: API xuất/nhập, backup và phục hồi an toàn, **6 giờ** | `J3-SAVE`: PWA và cập nhật app tại điểm an toàn, **7 giờ** |
-| **thanhpro82** — QA/tools | [#6](https://github.com/doductuan20235859/project_web/issues/6): CI và baseline test hiện có, **5 giờ** | `J2-QA`: headless scenario harness nhận executor, **6 giờ** | `J3-QA`: bộ fault injection, acceptance runner và báo cáo CI, **6 giờ** |
+| **doductuan20235859** — rules/content | [#2](https://github.com/doductuan20235859/project_web/issues/2): rules ngày và validator, **6 giờ** | [#9 — J2-RULES](https://github.com/doductuan20235859/project_web/issues/9): ca/nghỉ, payday/chi phí và validator phiên bản, **6 giờ** | [#14 — J3-RULES](https://github.com/doductuan20235859/project_web/issues/14): kịch bản/oracle cân bằng 30 ngày và tài liệu luật, **6 giờ** |
+| **DXKhai20235749** — engine | [#3](https://github.com/doductuan20235859/project_web/issues/3): executor ngày với fixture rules, **8 giờ** | [#10 — J2-ENGINE](https://github.com/doductuan20235859/project_web/issues/10): nhiều ngày, kinh tế/sức khỏe cuối ngày, **7 giờ** | [#15 — J3-ENGINE](https://github.com/doductuan20235859/project_web/issues/15): seed, ledger, ngưỡng và biên ngày 30, **6 giờ** |
+| **dhminh28** — UI | [#5](https://github.com/doductuan20235859/project_web/issues/5): ActivityPanel/DayReview qua props, **6 giờ** | [#11 — J2-UI](https://github.com/doductuan20235859/project_web/issues/11): nhật ký/quan hệ và review suy ra từ state, **6 giờ** | [#16 — J3-UI](https://github.com/doductuan20235859/project_web/issues/16): mobile, bàn phím, lỗi và presentation qua DayActions, **6 giờ** |
+| **kjfvnju** — session/save | [#4](https://github.com/doductuan20235859/project_web/issues/4): dispatch với executor được inject, **7 giờ** | [#12 — J2-SAVE](https://github.com/doductuan20235859/project_web/issues/12): API xuất/nhập, backup và phục hồi an toàn, **6 giờ** | [#17 — J3-SAVE](https://github.com/doductuan20235859/project_web/issues/17): PWA và cập nhật app tại điểm an toàn, **7 giờ** |
+| **thanhpro82** — QA/tools | [#6](https://github.com/doductuan20235859/project_web/issues/6): CI và baseline test hiện có, **5 giờ** | [#13 — J2-QA](https://github.com/doductuan20235859/project_web/issues/13): headless scenario harness nhận executor, **6 giờ** | [#18 — J3-QA](https://github.com/doductuan20235859/project_web/issues/18): bộ fault injection, acceptance runner và báo cáo CI, **6 giờ** |
 
 Ước lượng mỗi người lần lượt là 18, 21, 18, 20 và 17 giờ làm thực, chưa cộng review. KJFVNJU phụ trách thêm issue tích hợp ngày 1 khoảng 4 giờ; THANHPRO82 phụ trách một gate nghiệm thu thật cuối đợt khoảng 4 giờ. Như vậy cả ba Job của QA vẫn có thể bàn giao độc lập, không phải giữ mở vì chờ mọi phần khác. Nếu phần PWA phát sinh vượt dự kiến, tách PR cache và PR cập nhật an toàn trong cùng issue thay vì giảm kiểm chứng dữ liệu save.
 
@@ -121,7 +121,7 @@ Mỗi Job là một kết quả có thể review. Nếu vượt khoảng 8 giờ
 
 ## 5. Issue tích hợp ngày 1: một đầu mối, một demo thật
 
-**Mã:** `J-INTEGRATION` — tạo link issue thật khi mở. **Owner:** kjfvnju. **Reviewer:** DXKhai; thanhpro82 xác nhận kịch bản. **Ước lượng:** 4 giờ.
+**Issue:** [#19 — J-INTEGRATION](https://github.com/doductuan20235859/project_web/issues/19). **Owner:** kjfvnju. **Reviewer:** DXKhai; thanhpro82 xác nhận kịch bản. **Ước lượng:** 4 giờ.
 
 Issue này có phụ thuộc thật vào #2, #3, #4 và #5 đã merge. Dùng kiểm tra CI của #6 khi sẵn sàng; chưa có CI không miễn chạy các lệnh kiểm tra liên quan.
 
@@ -136,11 +136,11 @@ Năm issue Job 1 vẫn được đóng sau PR riêng merge và đạt nghiệm t
 
 | Mã | Owner, phạm vi | Đầu vào thật sự cần | Nghiệm thu module |
 |---|---|---|---|
-| `J2-RULES` | doductuan; cấu hình ca/nghỉ, payday/chi phí và phiên bản | #2 | Có rules cho ngày làm/nghỉ và mẫu cash/energy sát ngưỡng; validator phát hiện dữ liệu/phiên bản sai, ngày trả lương và phí được mô tả rõ; luôn có phương án nghỉ hợp lệ; không yêu cầu engine đã nối UI |
-| `J2-ENGINE` | DXKhai; economy/wellbeing qua nhiều ngày | #3 | Kiểm chứng energy 19/20 trước ngủ, XP trên 100, payday/chi phí chỉ xử lý một lần, phần thiếu giữ lại; chuỗi ACK/execute nhiều ngày dùng rules fixture riêng nếu rules thật đang review |
-| `J2-UI` | dhminh; nhật ký/quan hệ và review | #5 | Hiển thị ledger/journal và điểm riêng NPC từ snapshot fixture; phân biệt cash/lương chờ trả; review suy ra dữ liệu để hiển thị, không thêm field vào summary/save hoặc tự tính luật |
-| `J2-SAVE` | kjfvnju; use case xuất/nhập/backup | #4 | Dùng helper JSON sẵn có, validate trước khi thay current, giữ bản cũ khi lỗi/future version, phục hồi có CAS; lỗi commit không publish và retry không nhân hiệu ứng; dùng fake executor để kiểm chứng, trả dữ liệu qua port cho UI |
-| `J2-QA` | thanhpro82; `scripts/scenarios/**` và headless harness | #6, common executor port | Runner nhận executor/state/command sequence; xuất seed, bước lỗi, phase/revision và kết quả; tự kiểm tra harness bằng fixture, chưa kết luận cân bằng engine thật |
+| [#9 — J2-RULES](https://github.com/doductuan20235859/project_web/issues/9) | doductuan; cấu hình ca/nghỉ, payday/chi phí và phiên bản | #2 | Có rules cho ngày làm/nghỉ và mẫu cash/energy sát ngưỡng; validator phát hiện dữ liệu/phiên bản sai, ngày trả lương và phí được mô tả rõ; luôn có phương án nghỉ hợp lệ; không yêu cầu engine đã nối UI |
+| [#10 — J2-ENGINE](https://github.com/doductuan20235859/project_web/issues/10) | DXKhai; economy/wellbeing qua nhiều ngày | #3 | Kiểm chứng energy 19/20 trước ngủ, XP trên 100, payday/chi phí chỉ xử lý một lần, phần thiếu giữ lại; chuỗi ACK/execute nhiều ngày dùng rules fixture riêng nếu rules thật đang review |
+| [#11 — J2-UI](https://github.com/doductuan20235859/project_web/issues/11) | dhminh; nhật ký/quan hệ và review | #5 | Hiển thị ledger/journal và điểm riêng NPC từ snapshot fixture; phân biệt cash/lương chờ trả; review suy ra dữ liệu để hiển thị, không thêm field vào summary/save hoặc tự tính luật |
+| [#12 — J2-SAVE](https://github.com/doductuan20235859/project_web/issues/12) | kjfvnju; use case xuất/nhập/backup | #4 | Dùng helper JSON sẵn có, validate trước khi thay current, giữ bản cũ khi lỗi/future version, phục hồi có CAS; lỗi commit không publish và retry không nhân hiệu ứng; dùng fake executor để kiểm chứng, trả dữ liệu qua port cho UI |
+| [#13 — J2-QA](https://github.com/doductuan20235859/project_web/issues/13) | thanhpro82; `scripts/scenarios/**` và headless harness | #6, common executor port | Runner nhận executor/state/command sequence; xuất seed, bước lỗi, phase/revision và kết quả; tự kiểm tra harness bằng fixture, chưa kết luận cân bằng engine thật |
 
 Không ghi `Blocked by J-INTEGRATION` cho cả năm Job 2. Tích hợp thật có thể cung cấp thêm lỗi để sửa, nhưng không phải đầu vào bắt buộc của những sản phẩm trong bảng.
 
@@ -148,17 +148,17 @@ Không ghi `Blocked by J-INTEGRATION` cho cả năm Job 2. Tích hợp thật c�
 
 | Mã | Owner, phạm vi | Đầu vào | Nghiệm thu |
 |---|---|---|---|
-| `J3-RULES` | doductuan; kịch bản/oracle 30 ngày và tài liệu luật | `J2-RULES` | Dữ liệu tới payday, giả định thu/chi và policy mẫu qua validator; có bảng kết quả/ngưỡng kỳ vọng và các trạng thái cần kiểm tra; chỉ là dữ liệu/oracle, chưa kết luận đã cân bằng runtime hoặc hoàn thành truyện 30 ngày |
-| `J3-ENGINE` | DXKhai; ngưỡng, seed, ledger và biên chương | `J2-ENGINE` | Cùng seed/command cho cùng state; không chạy lại settlement sau ACK/reload; fixture ngày 30 trả lương trước tổng kết, ledger đối chiếu được, dừng đúng chương. Chỉ thêm đánh giá mục tiêu nếu contract đã có, không tự thêm story catalog; test không phụ thuộc UI/IndexedDB |
-| `J3-UI` | dhminh; mobile/a11y/lỗi và presentation | `J2-UI` | Các phase/view model fixture dùng được ở 360px, bàn phím và focus đúng; lỗi không xóa đầu vào, đang lưu không gửi lặp; UI nhận `DayActions` qua props và hiển thị sau reload theo snapshot; không import session singleton |
-| `J3-SAVE` | kjfvnju; PWA và cập nhật an toàn | `J2-SAVE` | Build production tải lần đầu rồi mở lại scaffold không mạng; cache app/assets tách database save; thông báo update chỉ reload khi session đã commit/xử lý xong; lifecycle có điểm inject kiểm tra an toàn, không cần engine thật để kiểm thử module và không cache workbench như ứng dụng chơi |
-| `J3-QA` | thanhpro82; fault injection, acceptance runner và báo cáo CI | `J2-QA` | Có wrapper repository lỗi/CAS, bộ scenario và reporter kiểm tra được bằng adapter thử nghiệm; CI baseline thật vẫn xanh; job này không chờ PWA/UI/engine hoàn chỉnh và không nhận là đã nghiệm thu sản phẩm |
+| [#14 — J3-RULES](https://github.com/doductuan20235859/project_web/issues/14) | doductuan; kịch bản/oracle 30 ngày và tài liệu luật | [#9 — J2-RULES](https://github.com/doductuan20235859/project_web/issues/9) | Dữ liệu tới payday, giả định thu/chi và policy mẫu qua validator; có bảng kết quả/ngưỡng kỳ vọng và các trạng thái cần kiểm tra; chỉ là dữ liệu/oracle, chưa kết luận đã cân bằng runtime hoặc hoàn thành truyện 30 ngày |
+| [#15 — J3-ENGINE](https://github.com/doductuan20235859/project_web/issues/15) | DXKhai; ngưỡng, seed, ledger và biên chương | [#10 — J2-ENGINE](https://github.com/doductuan20235859/project_web/issues/10) | Cùng seed/command cho cùng state; không chạy lại settlement sau ACK/reload; fixture ngày 30 trả lương trước tổng kết, ledger đối chiếu được, dừng đúng chương. Chỉ thêm đánh giá mục tiêu nếu contract đã có, không tự thêm story catalog; test không phụ thuộc UI/IndexedDB |
+| [#16 — J3-UI](https://github.com/doductuan20235859/project_web/issues/16) | dhminh; mobile/a11y/lỗi và presentation | [#11 — J2-UI](https://github.com/doductuan20235859/project_web/issues/11) | Các phase/view model fixture dùng được ở 360px, bàn phím và focus đúng; lỗi không xóa đầu vào, đang lưu không gửi lặp; UI nhận `DayActions` qua props và hiển thị sau reload theo snapshot; không import session singleton |
+| [#17 — J3-SAVE](https://github.com/doductuan20235859/project_web/issues/17) | kjfvnju; PWA và cập nhật an toàn | [#12 — J2-SAVE](https://github.com/doductuan20235859/project_web/issues/12) | Build production tải lần đầu rồi mở lại scaffold không mạng; cache app/assets tách database save; thông báo update chỉ reload khi session đã commit/xử lý xong; lifecycle có điểm inject kiểm tra an toàn, không cần engine thật để kiểm thử module và không cache workbench như ứng dụng chơi |
+| [#18 — J3-QA](https://github.com/doductuan20235859/project_web/issues/18) | thanhpro82; fault injection, acceptance runner và báo cáo CI | [#13 — J2-QA](https://github.com/doductuan20235859/project_web/issues/13) | Có wrapper repository lỗi/CAS, bộ scenario và reporter kiểm tra được bằng adapter thử nghiệm; CI baseline thật vẫn xanh; job này không chờ PWA/UI/engine hoàn chỉnh và không nhận là đã nghiệm thu sản phẩm |
 
-Tạo riêng **`J-FINAL` — nghiệm thu trên module thật**, owner thanhpro82, reviewer doductuan, ước lượng 4 giờ. Gate này phụ thuộc `J-INTEGRATION` và các Job 3 đã merge. Nó chạy luồng ngày thật, reload, thao tác lặp, payday/boundary, save conflict, mobile và offline; đối chiếu dữ liệu thật, ghi seed/log/bằng chứng. Không có test chỉ chạy fixture nào thay thế được gate này.
+Tạo riêng **[#20 — J-FINAL](https://github.com/doductuan20235859/project_web/issues/20) — nghiệm thu trên module thật**, owner thanhpro82, reviewer doductuan, ước lượng 4 giờ. Gate này phụ thuộc [#19 — J-INTEGRATION](https://github.com/doductuan20235859/project_web/issues/19) và các Job 3 đã merge. Nó chạy luồng ngày thật, reload, thao tác lặp, payday/boundary, save conflict, mobile và offline; đối chiếu dữ liệu thật, ghi seed/log/bằng chứng. Không có test chỉ chạy fixture nào thay thế được gate này.
 
-Như vậy 15 issue module có thể merge theo contract riêng. Chỉ hai issue `J-INTEGRATION` và `J-FINAL` có phụ thuộc chéo bắt buộc. Job 2/3 nối tiếp việc của chính owner; không biến chúng thành một hàng chờ năm người.
+Như vậy 15 issue module có thể merge theo contract riêng. Chỉ hai issue [#19 — J-INTEGRATION](https://github.com/doductuan20235859/project_web/issues/19) và [#20 — J-FINAL](https://github.com/doductuan20235859/project_web/issues/20) có phụ thuộc chéo bắt buộc. Job 2/3 nối tiếp việc của chính owner; không biến chúng thành một hàng chờ năm người.
 
-PWA được nghiệm thu module ở `J3-SAVE`, rồi QA xác nhận offline trong đường đi tích hợp thật khi sẵn sàng. Nếu chức năng chưa qua kiểm chứng thì báo rõ; không gắn nhãn toàn bộ cốt truyện 30 ngày đã đạt. Gặp pending event trong fixture chỉ chứng minh khả năng giữ/hiển thị snapshot đó, không chứng minh event engine đã hoạt động.
+PWA được nghiệm thu module ở [#17 — J3-SAVE](https://github.com/doductuan20235859/project_web/issues/17), rồi QA xác nhận offline trong đường đi tích hợp thật khi sẵn sàng. Nếu chức năng chưa qua kiểm chứng thì báo rõ; không gắn nhãn toàn bộ cốt truyện 30 ngày đã đạt. Gặp pending event trong fixture chỉ chứng minh khả năng giữ/hiển thị snapshot đó, không chứng minh event engine đã hoạt động.
 
 ## 8. Ownership để tránh xung đột
 
@@ -170,7 +170,7 @@ PWA được nghiệm thu module ở `J3-SAVE`, rồi QA xác nhận offline tro
 | kjfvnju | `src/application/**` trừ selectors trình bày, `src/infrastructure/**`, `tests/persistence/**`, `src/app/bootstrap.ts`, `src/app/integration/**` | Integration container đọc store/session và truyền props cho App; không nhận quyền sửa toàn bộ App/features |
 | thanhpro82 | `.github/workflows/**`, `tests/e2e/**`, scenario harness, scripts kiểm thử, cấu hình công cụ | Là đầu mối `package.json`/lockfile khi cần dependency; không sửa luật chỉ để test xanh |
 
-`App.tsx` là composition bằng props của dhminh; `src/app/integration/**` là phần nối session/store của kjfvnju. Hai người thống nhất props qua port trước, không cùng sửa một container. Việc chuyển App hiện tại sang điểm nối đó thuộc `J-INTEGRATION`, không thuộc common base additive.
+`App.tsx` là composition bằng props của dhminh; `src/app/integration/**` là phần nối session/store của kjfvnju. Hai người thống nhất props qua port trước, không cùng sửa một container. Việc chuyển App hiện tại sang điểm nối đó thuộc [#19 — J-INTEGRATION](https://github.com/doductuan20235859/project_web/issues/19), không thuộc common base additive.
 
 `src/testing/day-fixtures.ts` là dữ liệu chung đã chốt. Fixture riêng đặt trong test của owner; không dùng sửa fixture chung để che lỗi thực thi. Test của tính năng do owner tính năng viết; QA chịu CI/harness và kiểm tra xuyên lớp, không gánh toàn bộ test nhóm.
 
@@ -185,4 +185,4 @@ Reviewer chính theo vòng: doductuan → DXKhai → kjfvnju → doductuan; dhmi
 5. Tất cả PR hoàn thiện vẫn có base `develop`, dùng `Refs #<issue-thật>`, có reviewer khác tác giả và đạt kiểm tra trước merge. Không merge Draft PR vào nhánh common base để thay cho review vào develop.
 6. Sau PR merge và nghiệm thu đúng scope, đóng issue thủ công. `develop → main` là PR phát hành riêng; không yêu cầu năm Job 1 phải chờ phát hành mới được Done.
 
-Quy tắc đầy đủ ở [WORKFLOW.md](WORKFLOW.md). Khi số issue Job 2/3 được tạo, cập nhật link tại bảng thay cho mã kế hoạch; không đổi dependency module thành dependency toàn bộ demo nếu không có lý do kỹ thuật cụ thể.
+Quy tắc đầy đủ ở [WORKFLOW.md](WORKFLOW.md). Cập nhật tiến độ ngay trên các issue đã liên kết trong bảng; không đổi dependency module thành dependency toàn bộ demo nếu không có lý do kỹ thuật cụ thể.
