@@ -117,8 +117,10 @@ export class GameSession {
     if (state === null) return this.fail('Chưa có lượt chơi để thực hiện lệnh.');
     // Retry command đã commit: không chạy lại để tránh nhân hiệu ứng.
     if (command.commandId === state.meta.lastCommandId) return { ok: true };
+    // Lệnh cũ (vd. lần bấm thứ hai sau khi lần đầu đã thành công): từ chối nhưng không
+    // ghi lỗi vào store, để UI không báo lỗi cho một thao tác đã thành công.
     if (command.expectedRevision !== state.meta.revision) {
-      return this.fail('Lệnh đã cũ vì lượt chơi vừa thay đổi. Hãy xem lại trạng thái hiện tại.');
+      return { ok: false, message: 'Lệnh đã cũ vì lượt chơi vừa thay đổi. Hãy xem lại trạng thái hiện tại.' };
     }
     if (this.options.executor === undefined) return this.fail('Bản này chưa gắn engine ngày chơi.');
 

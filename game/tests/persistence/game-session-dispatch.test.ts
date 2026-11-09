@@ -93,6 +93,7 @@ describe('GameSession dispatch với executor được inject', () => {
     releases[0]!();
     expect(await first).toEqual({ ok: true });
     expect(await second).toMatchObject({ ok: false });
+    expect(useGameStore.getState()).toMatchObject({ status: 'ready', error: null });
     expect(executor).toHaveBeenCalledTimes(1);
     expect((await repository.load())?.state.meta.revision).toBe(1);
   });
