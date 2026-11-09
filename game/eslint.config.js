@@ -26,7 +26,7 @@ export default tseslint.config(
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['react', 'react/*', 'zustand', 'zustand/*', 'dexie', '**/content/**', '**/application/**', '**/infrastructure/**', '**/features/**', '**/app/**'],
+          group: ['react', 'react/*', 'zustand', 'zustand/*', 'dexie', '**/content/**', '**/application/**', '**/infrastructure/**', '**/features/**', '**/app/**', '**/testing/**', '**/workbench/**'],
           message: 'Domain và engine phải độc lập với giao diện, state store và hạ tầng.',
         }],
       }],
@@ -37,8 +37,19 @@ export default tseslint.config(
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['react', 'react/*', 'dexie', '**/infrastructure/**', '**/features/**', '**/app/**'],
+          group: ['react', 'react/*', 'dexie', '**/infrastructure/**', '**/features/**', '**/app/**', '**/testing/**', '**/workbench/**'],
           message: 'Application dùng port; adapter hạ tầng được ghép tại app/bootstrap.ts.',
+        }],
+      }],
+    },
+  },
+  {
+    files: ['src/app/**/*.{ts,tsx}', 'src/features/**/*.{ts,tsx}', 'src/content/**/*.ts', 'src/infrastructure/**/*.ts', 'src/shared/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': ['error', {
+        patterns: [{
+          group: ['**/testing/**', '**/workbench/**'],
+          message: 'Fixture và workbench chỉ dùng khi phát triển/kiểm thử, không nối vào luồng người chơi.',
         }],
       }],
     },

@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:workbench": "vite --host 127.0.0.1 --port 5174 --strictPort",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
@@ -16,6 +17,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:workbench": "playwright test --config playwright.workbench.config.ts",
     "validate:content": "tsx scripts/validate-content.ts"
   },
   "dependencies": {

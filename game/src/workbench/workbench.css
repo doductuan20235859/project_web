@@ -1,0 +1,38 @@
+.workbench { max-width: 1240px; margin: 0 auto; padding: 32px; }
+.workbench h1 { font-size: 2.4rem; margin-bottom: 12px; }
+.workbench h2 { margin-bottom: 18px; }
+.workbench h3 { font-size: 1rem; }
+.workbench-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.workbench-header p:not(.eyebrow) { max-width: 750px; color: var(--color-muted); margin-bottom: 0; font-size: .88rem; }
+.workbench-badge { white-space: nowrap; border: 1px solid #b87b54; padding: 8px 10px; border-radius: 7px; color: #81512d; font-size: .65rem; font-weight: 700; }
+.workbench-controls, .workbench-mount, .workbench-state-inspector { min-width: 0; border: 1px solid var(--color-line); border-radius: 12px; background: var(--color-paper); padding: 23px; margin-bottom: 24px; }
+.workbench-control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.workbench-control-grid label > span { display: block; margin-bottom: 8px; font-size: .8rem; font-weight: 600; }
+.workbench select { min-height: 43px; width: 100%; padding: 9px 10px; border: 1px solid #cdd3c4; border-radius: 7px; background: white; color: var(--color-ink); font: inherit; font-size: .82rem; }
+.workbench select:focus-visible, .workbench summary:focus-visible { outline: 3px solid var(--color-blue); outline-offset: 3px; }
+.workbench-command-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+.workbench-command-controls .button, .workbench-pending .button { font-size: .75rem; padding: 10px 14px; }
+.workbench-pending { padding: 16px; margin-bottom: 20px; border: 1px solid #cfad73; border-radius: 8px; background: #f9f0df; }
+.workbench-pending p { font-size: .8rem; }
+.workbench-pending .button { margin: 0 10px 8px 0; }
+.workbench-status { display: flex; flex-wrap: wrap; gap: 20px 30px; margin: 0; }
+.workbench-status dt { margin-bottom: 5px; color: var(--color-muted); font-size: .7rem; }
+.workbench-status dd { margin: 0; font-size: .9rem; font-weight: 600; }
+.workbench-slot { border: 1px dashed #a9b8a0; border-radius: 8px; padding: 18px; background: #f7f9f2; }
+.workbench-slot p { font-size: .8rem; color: var(--color-muted); }
+.workbench pre { max-width: 100%; overflow: auto; font-size: .75rem; line-height: 1.65; }
+.workbench-errors { color: var(--color-error); white-space: pre-wrap; }
+.workbench-anchor { margin: 38px 0 24px; }
+.workbench-anchor .save-indicator { display: none; }
+.workbench-state-inspector summary { cursor: pointer; font-weight: 600; font-size: .85rem; }
+.workbench .dashboard-heading h1 { font-size: 2.1rem; }
+
+@media (max-width: 760px) {
+  .workbench { padding: 22px 16px; }
+  .workbench-header { display: block; }
+  .workbench-header h1 { font-size: 2rem; }
+  .workbench-badge { display: inline-block; margin-top: 15px; }
+  .workbench-control-grid { grid-template-columns: 1fr; }
+  .workbench-controls, .workbench-mount, .workbench-state-inspector { padding: 18px; }
+  .workbench-command-controls .button { width: 100%; }
+}

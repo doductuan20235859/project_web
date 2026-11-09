@@ -5,6 +5,7 @@ Game web mô phỏng cuộc sống, lựa chọn và hậu quả dành cho trìn
 - [GDD](<# GAME DESIGN DOCUMENT (GDD).txt>): thiết kế gameplay gốc.
 - [Kế hoạch kiến trúc và triển khai](docs/KE_HOACH_KIEN_TRUC_VA_BASE_CODE.md): phạm vi MVP và roadmap.
 - [Ứng dụng trong game/](game/README.md): hướng dẫn chạy và cấu trúc source.
+- [Phân công song song 3 Job](docs/PHAN_CONG_SONG_SONG.md): contract, phạm vi riêng và điểm tích hợp của 5 thành viên.
 
 ## Công nghệ
 

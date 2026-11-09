@@ -124,16 +124,22 @@ npm test
 
 Khi review code gameplay, kiểm tra UI gửi lệnh qua `GameSession`, engine tính luật chơi, và store chỉ nhận state mới sau khi lưu thành công. [Quy ước kỹ thuật của game](../game/README.md)
 
-## 6. Đợt đầu · Chơi trọn ngày 1
+## 6. Đợt đầu · Năm Job 1 song song và một demo tích hợp
 
-**Demo nghiệm thu** — Tạo nhân vật → chọn hoạt động → xem kết quả ngày 1 → tải lại trang và vẫn thấy kết quả → xác nhận sang ngày 2 đúng một lần. Mốc này đi từ `planning` qua `review` rồi trở lại `planning` ở ngày 2.
+Common base cung cấp types, port executor/actions, state fixture và developer workbench. Nó chưa thực thi ngày chơi trong ứng dụng chính. Sau khi contract này được review, cả năm người có thể hoàn tất PR module riêng mà không chờ implementation của nhau.
 
-| Người | Issue đề xuất | Tiêu chí nghiệm thu | Phối hợp |
-|---|---|---|---|
-| 1 | Chốt luật ngày đầu | Có lịch ca, hoạt động làm/học/nghỉ, điều kiện hợp lệ và mức thay đổi tiền, thể lực, XP. Phân biệt tiền có thể tiêu và lương chờ trả. | Chốt bảng luật với người 2 để engine có dữ liệu triển khai. |
-| 2 | Triển khai `EXECUTE_DAY` và `ACK_DAY` | Lệnh hợp lệ đưa ngày 1 từ `planning` sang `review`. Xác nhận sang ngày 2 đúng một lần. Lệnh sai phase hoặc sai revision giữ nguyên state. | Chốt giao kèo với người 3 và 4 ngay đầu đợt. |
-| 3 | Làm UI chọn hoạt động và xem kết quả | Người chơi chọn hoạt động, xem kết quả và xác nhận sang ngày mới. Giao diện hiển thị lỗi và trạng thái đang lưu. | Dựng bằng state mẫu, sau đó nối với `GameSession` của người 4. |
-| 4 | Nối command vào `GameSession` và lưu game | Reload ở `review` quay lại đúng kết quả. Nếu ghi lỗi, giao diện giữ state đã lưu. Gửi lại lệnh cũ không áp dụng tác động lần hai. | Dùng contract đã chốt để làm phần lưu, tích hợp khi engine sẵn sàng. |
-| 5 | Kiểm thử luồng ngày đầu | Có kịch bản đi từ tạo nhân vật đến ngày 2, gồm reload giữa chừng và thao tác lặp. Ghi lỗi với bước tái hiện và kết quả mong đợi. | Chuẩn bị kịch bản và dữ liệu kiểm thử trước, chạy E2E khi luồng đã nối. |
+| Người | Issue Job 1 | Sản phẩm kiểm chứng độc lập |
+|---|---|---|
+| **doductuan** | [#2 — Rules/content](https://github.com/doductuan20235859/project_web/issues/2) | Dữ liệu luật ngày đúng contract và validator; không cần executor/UI thật |
+| **DXKhai** | [#3 — Engine](https://github.com/doductuan20235859/project_web/issues/3) | Executor planning → review → planning ngày 2, kiểm tra phase/revision bằng rules fixture |
+| **dhminh** | [#5 — UI](https://github.com/doductuan20235859/project_web/issues/5) | ActivityPanel/DayReview nhận props, demo trạng thái thường/khóa/lưu trong workbench |
+| **kjfvnju** | [#4 — Session/save](https://github.com/doductuan20235859/project_web/issues/4) | Dispatch nhận executor được inject, commit rồi publish; test lỗi ghi/CAS bằng fake executor |
+| **thanhpro82** | [#6 — QA/tools](https://github.com/doductuan20235859/project_web/issues/6) | CI, baseline E2E scaffold và kiểm tra workbench chạy ngay trên common base |
 
-Trong buổi kickoff, chốt tên 5 người, tạo milestone và các issue trên GitHub, rồi thay các phụ thuộc bằng số issue thật. Ghi giao kèo `EXECUTE_DAY`/`ACK_DAY` ngay trong issue engine để cả nhóm dùng chung. [Kế hoạch vòng ngày và các mốc tiếp theo](KE_HOACH_KIEN_TRUC_VA_BASE_CODE.md)
+Mỗi Job 1 có thể Done khi PR vào `develop` đã được người khác duyệt, merge và đạt tiêu chí module. Test bằng fixture phải được ghi rõ, không đồng nghĩa demo gameplay thật đã đạt. Job 2/3 nối tiếp phần việc của từng owner; không thêm phụ thuộc chéo chỉ vì chưa có màn hình hoặc engine của người bên cạnh.
+
+Tạo riêng issue **tích hợp ngày 1** do kjfvnju phụ trách sau khi #2/#3/#4/#5 có sản phẩm thật: ghép rules → executor → session → IndexedDB → component qua props. Demo nghiệm thu là tạo nhân vật → chọn hoạt động → review ngày 1 → reload vẫn review → xác nhận sang planning ngày 2 đúng một lần. DXKhai review, thanhpro82 kiểm chứng; bốn người còn lại có thể làm Job 2 trong lúc ghép. KJFVNJU giữ `app/bootstrap.ts` và integration container; DHMINH giữ `App.tsx`/component và giao điểm props.
+
+Common-base PR cũng phải có reviewer khác tác giả và PR về `develop`; không tự merge để rút ngắn thời gian chờ. Trong lúc chờ common base, có thể làm nhánh tạm trên commit base và mở Draft PR về `develop`; phải đợi base được duyệt/merge, cập nhật `develop`, kiểm tra diff riêng và chạy lại checks trước khi Ready/merge. Những nhánh bắt đầu sau đó vẫn tách từ `develop` theo mục 3.
+
+Xem [ma trận 3 Job × 5 người, paths/API và tiêu chí cụ thể](PHAN_CONG_SONG_SONG.md). Mã Job 2/3 trong tài liệu là mã kế hoạch; thay bằng link thật sau khi tạo issue. [Kế hoạch kiến trúc MVP](KE_HOACH_KIEN_TRUC_VA_BASE_CODE.md) vẫn mô tả đích dài hạn; không dùng fixture để tuyên bố event engine, offline hoặc toàn bộ 30 ngày đã hoàn thành.

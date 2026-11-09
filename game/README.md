@@ -78,3 +78,17 @@ Nếu Node chưa có trong PATH, dùng launcher `../run.ps1` ở thư mục dự
 ## Bước triển khai tiếp theo
 
 Chốt bảng balance và lịch ca làm, sau đó triển khai `EXECUTE_DAY` và `ACK_DAY` thành một vòng ngày. Nối một sự kiện có điều kiện/hậu quả trễ để hoàn thành lát cắt ba ngày trong [kế hoạch](../docs/KE_HOACH_KIEN_TRUC_VA_BASE_CODE.md).
+
+## Làm việc song song
+
+[Phân công 3 Job cho 5 người](../docs/PHAN_CONG_SONG_SONG.md) là backlog triển khai tiếp theo; [WORKFLOW](../docs/WORKFLOW.md) quy định nhánh và review.
+
+- `src/domain/model/day-rules.ts` và `day-view.ts`: contract luật và danh sách hoạt động.
+- `src/application/ports/command-executor.ts` và `day-actions.ts`: điểm nối engine/session/UI.
+- `src/testing/day-fixtures.ts`: state, rules và executor kiểm thử; không dùng làm gameplay thật.
+- `src/workbench/`: sandbox phát triển, không đọc/ghi save. Chạy `npm run dev:workbench`, mở `http://127.0.0.1:5174/workbench.html`.
+- `npm run test:workbench`: kiểm tra sandbox độc lập với engine/session đang triển khai.
+
+Mỗi Job 1 có thể nghiệm thu bằng contract/fixture của mình. Luồng thật được ghép trong issue tích hợp riêng. Không thay `GameState`/save schema 1 chỉ để phục vụ mock; `DaySummary` hiện có `day` và `message`.
+
+Workbench là entry dành cho Vite dev. `npm run build` chỉ đóng gói `index.html`; App không import fixture hoặc workbench. Các số trong fixture là ví dụ cố định để kiểm thử, không phải balance production.
